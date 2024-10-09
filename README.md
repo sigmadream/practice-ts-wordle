@@ -1,4 +1,4 @@
-# World with TS
+# Wordle with TS
 
 ## 실행 환경
 
