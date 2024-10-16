@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { AccuracyEnum } from "../../utilities/accuracy.utils";
 import Letter from "../Letter";
+import { AccuracyEnum } from "../../utilities/accuracy.utils";
+import { evaluateWordScore } from "../../utilities/evaluation";
+import { retrieveAnswer } from "../../utilities/answerRetriever";
 
 interface IWordProps {
   isWordEvaluated: boolean;
@@ -8,19 +10,35 @@ interface IWordProps {
 }
 
 export const Word = ({ isWordEvaluated, guessWordValue }: IWordProps) => {
+  const inititalAccuracyArray = [
+    AccuracyEnum.none,
+    AccuracyEnum.none,
+    AccuracyEnum.none,
+    AccuracyEnum.none,
+    AccuracyEnum.none,
+  ];
+
   const [isEvaluated, setIsEvaluated] = useState(false);
   const [guessValue, setGuessValue] = useState("");
+  const [evaluatedResults, setEvaluatedResults] = useState<AccuracyEnum[]>(
+    inititalAccuracyArray
+  );
+
+  useEffect(() => {
+    const results = evaluateWordScore(
+      guessValue,
+      retrieveAnswer().toUpperCase()
+    );
+    setEvaluatedResults(results);
+    setIsEvaluated(isWordEvaluated);
+  }, [isWordEvaluated]);
 
   useEffect(() => {
     setGuessValue(guessWordValue);
   }, [guessWordValue]);
 
-  useEffect(() => {
-    setIsEvaluated(isWordEvaluated);
-  }, [isWordEvaluated]);
-
   return (
-    <>
+    <div style={{ marginLeft: "15px" }}>
       {guessValue
         .toUpperCase()
         .split("")
@@ -29,11 +47,13 @@ export const Word = ({ isWordEvaluated, guessWordValue }: IWordProps) => {
             <Letter
               key={"letter_" + letterIndex}
               value={nextLetter}
-              accuracy={AccuracyEnum.none}
+              accuracy={
+                isEvaluated ? evaluatedResults[letterIndex] : AccuracyEnum.none
+              }
               position={letterIndex}
             />
           );
         })}
-    </>
+    </div>
   );
 };
