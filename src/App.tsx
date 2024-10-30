@@ -1,15 +1,29 @@
-import React from "react";
-import Letter from "./component/Letter";
-import { AccuracyEnum } from "./utilities/accuracy.utils";
+import { useState } from "react";
+import { Word } from "./component/Word";
+import { WordEntry } from "./component/WordEntry";
+import { retrieveAnswer } from "./utilities/answerRetriever";
 
 function App() {
+  const [wordGuess, setWordGuess] = useState("");
+  const [nextGuessPosition, setNextGuessPosition] = useState(0);
+  const [winning, setWinning] = useState<boolean | null>(null);
+
+  const handleGuessCompletion = (guess: string): void => {
+    if (wordGuess === retrieveAnswer().toUpperCase()) {
+      setWinning(true);
+      return;
+    }
+
+    setNextGuessPosition(nextGuessPosition + 1);
+  };
+
   return (
     <>
-      <Letter accuracy={AccuracyEnum.correct} position={0} value="R" />
-      <Letter accuracy={AccuracyEnum.doesNotExist} position={1} value="E" />
-      <Letter accuracy={AccuracyEnum.wrongPosition} position={2} value="A" />
-      <Letter accuracy={AccuracyEnum.wrongPosition} position={3} value="C" />
-      <Letter accuracy={AccuracyEnum.correct} position={4} value="T" />
+      <WordEntry
+        onGuessEntered={(guess) => setWordGuess(guess)}
+        onGuessComplete={() => handleGuessCompletion(wordGuess)}
+      />
+      <Word isWordEvaluated={false} guessWordValue={wordGuess} />
     </>
   );
 }
