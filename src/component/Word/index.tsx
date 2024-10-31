@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Letter from "../Letter";
 import { AccuracyEnum } from "../../utilities/accuracy.utils";
+import { evaluateWordScore } from "../../utilities/evaluation";
+import { retrieveAnswer } from "../../utilities/answerRetriever";
 
 interface IWordProps {
   isWordEvaluated: boolean;
@@ -23,11 +25,21 @@ export const Word = ({ isWordEvaluated, guessWordValue }: IWordProps) => {
   );
 
   useEffect(() => {
-    setGuessValue(guessWordValue);
+    const results = evaluateWordScore(
+      guessValue,
+      retrieveAnswer().toUpperCase()
+    );
+    setEvaluatedResults(results);
+    setIsEvaluated(isWordEvaluated);
+  }, [isWordEvaluated]);
+
+  useEffect(() => {
+    setGuessValue(guessWordValue.padEnd(5, "_"));
   }, [guessWordValue]);
 
   return (
-    <div style={{ marginLeft: "15px" }}>
+    // letter rendering goes here
+    <div style={{}}>
       {guessValue
         .toUpperCase()
         .split("")
