@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Letter from "../Letter";
 import { AccuracyEnum } from "../../utilities/accuracy.utils";
-import { evaluateWordScore } from "../../utilities/evaluation";
-import { retrieveAnswer } from "../../utilities/answerRetriever";
 
 interface IWordProps {
   isWordEvaluated: boolean;
@@ -23,15 +21,6 @@ export const Word = ({ isWordEvaluated, guessWordValue }: IWordProps) => {
   const [evaluatedResults, setEvaluatedResults] = useState<AccuracyEnum[]>(
     inititalAccuracyArray
   );
-
-  useEffect(() => {
-    const results = evaluateWordScore(
-      guessValue,
-      retrieveAnswer().toUpperCase()
-    );
-    setEvaluatedResults(results);
-    setIsEvaluated(isWordEvaluated);
-  }, [isWordEvaluated]);
 
   useEffect(() => {
     setGuessValue(guessWordValue);

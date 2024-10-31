@@ -14,10 +14,10 @@ export const StyledWordEntry = styled.input`
 `;
 
 const fadeInAnimation = keyframes`
- 0% { opacity: 0}
- 30% { opacity: 0.3 }
- 40% { opacity: 0.6; }
- 100% { opacity: 1; }
+  0% { opacity: 0}
+  30% { opacity: 0.3 }
+  40% { opacity: 0.6; }
+  100% { opacity: 1; }
 `;
 
 export const StyledGameOverDisplay = styled.div`
@@ -30,6 +30,7 @@ export const StyledGameOverDisplay = styled.div`
   animation-duration: 3s;
   animation-iteration-count: 1;
 `;
+
 export const StyledEvaluateButton = styled.button`
   width: 72px;
   height: 40px;
