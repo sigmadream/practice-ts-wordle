@@ -1,32 +1,22 @@
 # Wordle with TS
 
+> TypeScript를 사용해서 Wordle을 구현한 테스트용 코드입니다. Vite를 사용하였고, Node.js 기반의 React로 구성되어 있습니다.
+
 ## 실행 환경
 
 ```bash
-$ npm create vite@latest wordle --template react-ts
-Need to install the following packages:
-create-vite@5.5.3
-Ok to proceed? (y)
+git clone https://github.com/sigmadream/practice-ts-wordle.git
+cd practice-ts-wordle
+npm install
+npm run dev
 
-> npx
-> create-vite wordle react-ts
+> wordle@0.0.0 dev
+> vite
 
-√ Select a framework: » React
-√ Select a variant: » TypeScript
 
-Scaffolding project in C:\Users\sigma\works\wordle...
+  VITE v5.4.8  ready in 158 ms
 
-Done. Now run:
-
-  cd wordle
-  npm install
-  npm run dev
-
-npm notice
-npm notice New minor version of npm available! 10.8.3 -> 10.9.0
-npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.9.0
-npm notice To update run: npm install -g npm@10.9.0
-npm notice
-
-$ npm install styled-components
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 ```
