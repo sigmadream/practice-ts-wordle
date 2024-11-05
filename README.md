@@ -20,3 +20,9 @@ npm run dev
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ```
+
+## TODO
+
+- [X] UI 컴포넌트
+- [X] 알고리즘 테스트
+- [ ] 화면 조정 및 변경
